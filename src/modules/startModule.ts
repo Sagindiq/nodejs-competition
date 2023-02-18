@@ -1,7 +1,10 @@
 import { Context, Telegraf } from "telegraf";
+import { serviceModel } from "../model";
 
-export default function startModule (bot: Telegraf) {
-    bot.command('start', (ctx: Context) => {
+export default async function startModule (bot: Telegraf) {
+    bot.command('start', async(ctx: Context) => {
+        const customers = await serviceModel.find()
+        console.log(customers)
         ctx.reply('Asssalomu aleykum, ' + ctx.from?.first_name + '!\n\n' + '_Mutahasislar va mijozlarni vaqtini\ntejash uchun ishlab chiqarilgan\nbotga xush kelibsiz_', {
             reply_markup: {
                 inline_keyboard: [
